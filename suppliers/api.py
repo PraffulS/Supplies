@@ -5,11 +5,13 @@ from django.views.decorators.http import require_GET, require_POST
 from django.views.decorators.csrf import csrf_exempt
 from suppliers.models import *
 from suppliers.serializers import *
+from django.db import IntegrityError
 
 @require_POST
+@csrf_exempt
 def add_edit_supplier(request):
     try:
-        args = json.loads(request.body)
+        args = request.POST.dict()
         if not args:
             return HttpResponseServerError('Invalid Data Found')
         
@@ -21,9 +23,11 @@ def add_edit_supplier(request):
         [ setattr(supplier, key, args.get(key)) for key in args.keys() ]
         supplier.save()
 
-        return JsonResponse({'data' : SupplierSerializer(supplier, many=False).data, 'message' : 'Success'})
+        return JsonResponse({'code': 1, 'data' : SupplierSerializer(supplier, many=False).data, 'message' : 'You\'ve successfully signed up. Please login to access your account.'})
+    except IntegrityError:
+        return JsonResponse({'code': 0, 'message' :'Email Id already exists'})
     except Exception as e:
-        return HttpResponseServerError('Server Error - {}'.format(str(e)))
+        return JsonResponse({'code': 0, 'message' :'Internal Server Error'+str(e)})
 
 @require_POST
 def add_edit_product(request):
@@ -46,20 +50,20 @@ def add_edit_product(request):
 
 
 @require_POST
+@csrf_exempt
 def supplier_login(request):
     data = request.POST.dict()
-    email = data.get('email')
+    username = data.get('username')
     password = data.get('password')
-    supplier = Suppliers.objects.filter(email__iexact=email).first()
+    supplier = Suppliers.objects.filter(primary_email__iexact=username).first()
 
     if not supplier:
-        return HttpResponseServerError('Invalid Email Id found')
+        return JsonResponse({'code': 1, 'message' :'Invalid Email Id found'})
     
     if not password == supplier.password:
-        return HttpResponseServerError('Wrong Password Given')
+        return JsonResponse({'code': 1, 'message' :'Wrong Password Given'})
     
-    request.session['is_supplier_login'] = True
-    return HttpResponse('Success')
+    return JsonResponse({'code': 0, 'message' :'Logged In!', 'supplier_id' : supplier.id})
 
 @require_GET
 def get_products_by_supplier(request, s_id):
@@ -67,9 +71,10 @@ def get_products_by_supplier(request, s_id):
     return JsonResponse({'data': ProductSerializer(result, many=True).data })
 
 @require_GET
+@csrf_exempt
 def get_supplier(request, s_id):
     result = Suppliers.objects.get(id=s_id)    
-    return JsonResponse({'data': SupplierSerializer(result, many=True).data })
+    return JsonResponse({'data': SupplierSerializer(result, many=False).data })
 
 
 

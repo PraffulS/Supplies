@@ -97,3 +97,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+FrontEnd/node_modules
+FrontEnd/package-lock.json

@@ -1,0 +1,123 @@
+:root {
+  --color-primary: #7e7edf;
+}
+
+.App {
+  font-family: sans-serif;
+  height: 100%;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.title {
+  font-size: 20px;
+  background: rgb(126, 126, 223);
+  color: white;
+  font-weight: 700;
+  padding: 3%;
+  cursor: pointer;
+}
+
+li {
+  background: white;
+  border-radius: 5px;
+  padding: 2%;
+  font-size: 18px;
+  color: black;
+  margin-bottom: 9px;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  font-weight: 300;
+  background-color: transparent;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.active-link {
+  color: #7e7edf;
+  font-weight: 700;
+}
+
+.count {
+  float: right;
+}
+
+.table-header {
+  color: #66666d;
+}
+
+.table-body {
+  background-color: white;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary.disabled {
+  background-color: var(--color-primary) !important;
+  border: 1px solid var(--color-primary) !important;
+}
+
+.btn-outline-primary,
+.btn-outline-primary:focus {
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  background-color: transparent !important;
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary);
+}
+
+.data-card {
+  font-size: 14px;
+  border-bottom: 6px solid white;
+  padding: 1% 1%;
+  border-radius: 5px;
+  background-color: #fbf9f9;
+}
+
+.data-card:hover {
+  background-color: #f1eded;
+  cursor: pointer;
+}
+
+.badge {
+  font-size: 12px;
+}
+
+.sleek-button {
+  padding-right: 6%;
+  padding-left: 6%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.not-found {
+  text-align: center;
+  padding: 10%;
+  border: 1px solid #e6e6e6;
+}
+
+.modal-wide {
+  min-width: 50%;
+}
+
+.modal-title {
+  font-size: 20px;
+}
+
+.scroll-div {
+      padding: 1% 1%;
+    border: 1px solid #ababea;
+    max-height: 300px;
+    overflow: scroll;
+}
