@@ -43,3 +43,17 @@ export const get_supplier = (id) => {
         );
     });
 };
+
+export const get_products = (id) => {
+    return new Promise((resolve, reject) => {
+        doGet(
+            `product/get/${id}`,
+            (response) => {
+                return resolve(response);
+            },
+            (error) => {
+                return reject(error);
+            }
+        );
+    });
+};

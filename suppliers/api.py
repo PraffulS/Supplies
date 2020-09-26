@@ -66,6 +66,7 @@ def supplier_login(request):
     return JsonResponse({'code': 0, 'message' :'Logged In!', 'supplier_id' : supplier.id})
 
 @require_GET
+@csrf_exempt
 def get_products_by_supplier(request, s_id):
     result = Products.objects.filter(supplier_id=s_id, is_deleted=False)
     return JsonResponse({'data': ProductSerializer(result, many=True).data })

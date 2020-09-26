@@ -23,6 +23,12 @@ class SideBarImpl extends React.Component {
                 &nbsp; &nbsp; Profile{" "}
               </NavLink>
             </li>
+            <li>
+              <NavLink activeClassName="active-link" to="/products">
+                <i style={{ fontSize: "100%" }} className="/products" />
+                &nbsp; &nbsp; Products{" "}
+              </NavLink>
+            </li>
 
             <li>
               <NavLink

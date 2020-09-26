@@ -11,5 +11,5 @@ suppliers_urlpatterns = [
 
 products_urlpatterns = [
     url(r'^save/$', add_edit_product),
-    url(r'^get/$', get_products_by_supplier),
+    url(r'^get/(?P<s_id>\w+)$', get_products_by_supplier),
 ]

@@ -27,8 +27,9 @@ class Products(models.Model):
     currency = models.CharField(max_length=3)
     discount_percentage = models.FloatField(default=0.0)
     min_units_for_discount = models.FloatField(default=0.0)
-    other_notes = models.CharField(max_length=500)
+    other_notes = models.CharField(max_length=500, null=True)
 
+    code = models.CharField(max_length=10, null=False)
     supplier = models.ForeignKey(Suppliers, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
