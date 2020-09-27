@@ -14,4 +14,5 @@ products_urlpatterns = [
     url(r'^save/$', add_edit_product),
     url(r'^get/(?P<s_id>\w+)$', get_products_by_supplier),
     url(r'^delete/(?P<p_id>\w+)$', delete_product),
+    url(r'^get/$', get_all_products),
 ]

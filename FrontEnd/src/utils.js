@@ -12,7 +12,7 @@ const logout = () => {
   window.location.href = "";
 };
 
-const createOptionForReactSelect = (list) => {
+const createOptionForReactSelect = (list, key = 'business_name') => {
   const options = [];
   if (!list) {
     return options;
@@ -21,7 +21,7 @@ const createOptionForReactSelect = (list) => {
   list.forEach((instance) => {
     options.push({
       value: instance["id"],
-      label: instance["business_name"],
+      label: instance[key],
       ...instance
     });
   });

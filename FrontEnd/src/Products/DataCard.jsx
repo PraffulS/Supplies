@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import moment from "moment";
 import AddEditProductsModal from "./AddEditProductsModal";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import { delete_product } from "../services";
 export default class DataCard extends React.Component {
   static defaultProps = {
     data: {},
+    viewOnly: false,
   };
 
   state = {
@@ -24,9 +25,18 @@ export default class DataCard extends React.Component {
     this.props.refresh();
   };
 
+  renderTooltip = (discount_percentage, min_units_for_discount) => {
+    return (
+      <>
+        Discount of ${discount_percentage} % on minimum order of $
+        {min_units_for_discount}
+      </>
+    );
+  };
+
   render() {
     const { showModal, loading } = this.state;
-    const { data, index } = this.props;
+    const { data, index, viewOnly } = this.props;
     const {
       id,
       name,
@@ -40,6 +50,7 @@ export default class DataCard extends React.Component {
       last_updated_at,
       is_deleted,
       code,
+      supplier,
     } = data;
 
     return (
@@ -59,7 +70,21 @@ export default class DataCard extends React.Component {
             </div>
             <div style={{ flex: 1 }}>#{code}</div>
             <div style={{ flex: 1 }}>
-              {currency} {price_per_unit}
+              {currency} {price_per_unit}{" "}
+              <OverlayTrigger
+                placement="right"
+                overlay={
+                  <Tooltip id="tooltip">
+                    Discount of {discount_percentage} % on minimum order of{" "}
+                    {min_units_for_discount} units
+                  </Tooltip>
+                }
+              >
+                <span style={{ color: "#4a90e2" }}>
+                  {" "}
+                  &nbsp; &nbsp; <i className="fa fa-info-circle"></i>
+                </span>
+              </OverlayTrigger>
             </div>
             <div style={{ flex: 1.5 }}>
               {moment(last_updated_at).format("Do MMM YY, hh:mm a")}{" "}
@@ -69,23 +94,37 @@ export default class DataCard extends React.Component {
         <div className="display-flex">
           <div style={{ flex: 0.8 }}>
             <i>{description}</i>
+            {!!viewOnly && (
+              <>
+                <br />
+                Supplier Name - <b>{supplier.business_name}</b>
+              </>
+            )}
           </div>
           <div style={{ flex: 0.2, textAlign: "right" }}>
-            <Button
-              className="btn-outline-primary sleek-button"
-              onClick={this.delete}
-              disabled={loading}
-            >
-              Delete <i className="fa fa-trash" aria-hidden="true"></i>
-            </Button>{" "}
-            &nbsp;&nbsp;{" "}
-            <Button
-              className="btn-outline-primary sleek-button"
-              onClick={() => this.setState({ showModal: true })}
-              disabled={loading}
-            >
-              Edit <i className="fa fa-edit" aria-hidden="true"></i>{" "}
-            </Button>
+            {!viewOnly ? (
+              <>
+                <Button
+                  className="btn-outline-primary sleek-button"
+                  onClick={this.delete}
+                  disabled={loading}
+                >
+                  Delete <i className="fa fa-trash" aria-hidden="true"></i>
+                </Button>{" "}
+                &nbsp;&nbsp;{" "}
+                <Button
+                  className="btn-outline-primary sleek-button"
+                  onClick={() => this.setState({ showModal: true })}
+                  disabled={loading}
+                >
+                  Edit <i className="fa fa-edit" aria-hidden="true"></i>{" "}
+                </Button>
+              </>
+            ) : (
+              <Button className="btn-outline-primary sleek-button">
+                Request Quote <i className="far fa-envelope"></i>
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -88,8 +88,8 @@ def delete_product(request, p_id):
     Products.objects.filter(id=p_id).update(is_deleted=True)
     return JsonResponse({'code': 1, 'message': 'Product deleted successfully!'})
 
-
-
-
-
-
+@require_GET
+@csrf_exempt
+def get_all_products(request):
+    result = Products.objects.filter(is_deleted=False)
+    return JsonResponse({'data': ProductWithSupplierNameSerializer(result, many=True).data })

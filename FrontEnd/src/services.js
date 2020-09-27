@@ -101,3 +101,17 @@ export const admin_login = (username, password) => {
         );
     });
 };
+
+export const get_all_products = () => {
+    return new Promise((resolve, reject) => {
+        doGet(
+            `product/get/`,
+            (response) => {
+                return resolve(response);
+            },
+            (error) => {
+                return reject(error);
+            }
+        );
+    });
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import ProductsListNewView from "./Admin/Products/ProductsListNewView";
 import SuppliersListView from "./Admin/Suppliers/SuppliersListView";
 import ProductsListView from "./Products/ProductsListView";
 import SupplierProfile from "./Profile Page/SupplierProfile";
@@ -35,7 +36,7 @@ export const admin_routes = [
   {
     path: "/admin/products",
     exact: true,
-    main: () => <ProductsListView />
+    main: () => <ProductsListNewView />
   },
   {
     path: "/orders",
