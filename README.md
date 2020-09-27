@@ -1,4 +1,4 @@
-Supplies is a web application where suppliers can register and start creating their profiles, adding their products for people to see.
+Supplies is a web application where suppliers can register and start creating their profiles, adding their buyers for people to see.
 
 Stack - 
 
