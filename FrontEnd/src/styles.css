@@ -118,8 +118,15 @@ a:hover {
 }
 
 .scroll-div {
-      padding: 1% 1%;
-    border: 1px solid #ababea;
-    max-height: 300px;
-    overflow: scroll;
+  padding: 1% 1%;
+  border: 1px solid #ababea;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.select-option {
+  padding: 1% 5%;
+  border: 0.5px solid #eeeeee;
+  font-size: 15px;
+  cursor: pointer;
 }

@@ -58,6 +58,7 @@ export default class ProductsListNewView extends React.Component {
             isSearchable={true}
             name="color"
             onChange={this.handleChange}
+            components={{ Option: CustomOption }}
             options={createOptionForReactSelect(products, "name")}
           />
         </div>{" "}
@@ -89,3 +90,17 @@ export default class ProductsListNewView extends React.Component {
     );
   }
 }
+
+const CustomOption = (props) => {
+  const { innerProps, data } = props;
+  const { name, supplier, currency, price_per_unit } = data;
+
+  return (
+    <div {...innerProps} className={"select-option"}>
+      <b>{name} </b>
+      <br />
+      Price - {currency} {price_per_unit} / unit <br />
+      Supplier - {supplier.business_name}
+    </div>
+  );
+};
