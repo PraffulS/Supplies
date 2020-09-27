@@ -108,7 +108,7 @@ export default class SupplierProfileForm extends React.Component {
             as="textarea"
             rows="3"
             value={business_address}
-            maxLength={50}
+            maxLength={500}
           />
         </Form.Group>
         <hr />

@@ -139,7 +139,7 @@ export default class AddEditProductsModal extends React.Component {
                 value={description}
                 as="textarea"
                 rows="3"
-                maxLength={50}
+                maxLength={500}
               />
             </Form.Group>
 
@@ -212,7 +212,7 @@ export default class AddEditProductsModal extends React.Component {
                 value={other_notes}
                 as="textarea"
                 rows="3"
-                maxLength={50}
+                maxLength={500}
               />
             </Form.Group>
           </Form>
