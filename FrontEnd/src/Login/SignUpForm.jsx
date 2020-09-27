@@ -53,7 +53,7 @@ export default class SignUpForm extends React.Component {
       let response = await supplier_register(this.state);
       if (response.code === 1) {
         toast(response.message, { type: "success" });
-        this.props.toggle();
+        this.props.toggle(1,0,0);
       } else {
         toast(response.message, { type: "error" });
       }

@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from suppliers.urls import *
+from Admins.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('supplier/', include(suppliers_urlpatterns)),
     path('product/', include(products_urlpatterns)),
+    path('admins/', include(admin_urlpatterns))
 ]
 

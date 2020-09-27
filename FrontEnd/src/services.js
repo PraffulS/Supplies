@@ -33,7 +33,7 @@ export const supplier_register = (data) => {
 export const get_supplier = (id) => {
     return new Promise((resolve, reject) => {
         doGet(
-            `supplier/get/${id}`,
+            `supplier/get/${id ? id : ''}`,
             (response) => {
                 return resolve(response);
             },
@@ -77,6 +77,21 @@ export const delete_product = (id) => {
     return new Promise((resolve, reject) => {
         doGet(
             `product/delete/${id}`,
+            (response) => {
+                return resolve(response);
+            },
+            (error) => {
+                return reject(error);
+            }
+        );
+    });
+};
+
+export const admin_login = (username, password) => {
+    return new Promise((resolve, reject) => {
+        doPost(
+            `admins/login/`,
+            {username, password},
             (response) => {
                 return resolve(response);
             },

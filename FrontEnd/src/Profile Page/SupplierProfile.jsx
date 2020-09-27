@@ -6,23 +6,31 @@ import { get_supplier, supplier_register } from "../services";
 import SupplierProfileForm from "./SupplierProfileForm";
 
 export default class SupplierProfile extends React.Component {
+  static defaultProps = {
+    data: null,
+  };
   state = {
     loading: true,
     data: {},
     showEdit: false,
-    saving: false
+    saving: false,
   };
 
   componentDidMount = async () => {
     const supplier_id = sessionStorage.getItem("supplier_id");
-    let res = await get_supplier(supplier_id);
-    this.setState({
-      data: res.data,
-      loading: false,
-    });
+    if (supplier_id) {
+      let res = await get_supplier(supplier_id);
+      this.setState({
+        data: res.data,
+        loading: false,
+      });
+    } else {
+      this.setState({
+        data: this.props.data,
+        loading: false,
+      });
+    }
   };
-
-  
 
   renderValue = (label, value) => {
     return (
@@ -57,20 +65,24 @@ export default class SupplierProfile extends React.Component {
       return (
         <SupplierProfileForm
           data={data}
-          changeState={ (data) => this.setState({...data})}
+          changeState={(data) => this.setState({ ...data })}
           onCancel={() => this.setState({ showEdit: false })}
         />
       );
 
     return (
       <>
-        <Button
-          style={{ float: "right" }}
-          onClick={() => this.setState({ showEdit: true })}
-        >
-          Edit Profile
-        </Button>
-        <h5 style={{ color: "#7e7edf" }}>My Profile</h5>
+        {!this.props.data && (
+          <Button
+            style={{ float: "right" }}
+            onClick={() => this.setState({ showEdit: true })}
+          >
+            Edit Profile
+          </Button>
+        )}
+        <h5 style={{ color: "#7e7edf" }}>
+          {!this.props.data ? "My Profile" : "Supplier Profile"}
+        </h5>
         <div>{this.renderValue("Business Name", business_name)}</div> <br />
         <div>{this.renderValue("Address", business_address)}</div>
         <hr />
@@ -102,14 +114,6 @@ export default class SupplierProfile extends React.Component {
   render() {
     const { loading } = this.state;
 
-    return (
-      <div>
-        {loading ? (
-          <Loading />
-        ) : (
-          this.renderProfile()
-        )}
-      </div>
-    );
+    return <div>{loading ? <Loading /> : this.renderProfile()}</div>;
   }
 }

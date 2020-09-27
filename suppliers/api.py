@@ -74,9 +74,13 @@ def get_products_by_supplier(request, s_id):
 
 @require_GET
 @csrf_exempt
-def get_supplier(request, s_id):
-    result = Suppliers.objects.get(id=s_id)    
-    return JsonResponse({'data': SupplierSerializer(result, many=False).data })
+def get_supplier(request, s_id=None):
+    if s_id:
+        result = Suppliers.objects.get(id=s_id)
+    else:
+        result = Suppliers.objects.all()
+
+    return JsonResponse({'data': SupplierSerializer(result, many=False if s_id else True).data })
 
 @require_GET
 @csrf_exempt

@@ -10,7 +10,9 @@ export class EmptyState extends React.Component {
             className="fa fa-exclamation-triangle"
           />{" "}
           <br />
-          No Data Found. Start Adding Products usng Add New Button.
+          {this.props.message
+            ? this.props.message
+            : `No Data Found. Start Adding Products usng Add New Button.`}
         </div>
       </div>
     );
