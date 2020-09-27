@@ -32,3 +32,8 @@ To run on the app locally
 1. go to supplies/FrontEnd
 2. run command "npm install"
 3. run command "npm start"
+
+
+Screen Recording of the functining - https://www.loom.com/share/5cadac66f32a454ca8fca481ef8edd4d
+
+Credentials for admin sign in -> username - "admin-simfoni" and password - "Admin@123"
