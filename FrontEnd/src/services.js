@@ -57,3 +57,32 @@ export const get_products = (id) => {
         );
     });
 };
+
+export const product_register = (data) => {
+    return new Promise((resolve, reject) => {
+        doPost(
+            `product/save/`,
+            data,
+            (response) => {
+                return resolve(response);
+            },
+            (error) => {
+                return reject(error);
+            }
+        );
+    });
+};
+
+export const delete_product = (id) => {
+    return new Promise((resolve, reject) => {
+        doGet(
+            `product/delete/${id}`,
+            (response) => {
+                return resolve(response);
+            },
+            (error) => {
+                return reject(error);
+            }
+        );
+    });
+};

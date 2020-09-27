@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { Loading } from "../Loading";
 import { get_supplier, supplier_register } from "../services";
 import SupplierProfileForm from "./SupplierProfileForm";
 
@@ -104,7 +105,7 @@ export default class SupplierProfile extends React.Component {
     return (
       <div>
         {loading ? (
-          <>Please wait while get the data...</>
+          <Loading />
         ) : (
           this.renderProfile()
         )}

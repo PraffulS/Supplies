@@ -12,6 +12,16 @@ export const routes = [
     path: "/products",
     exact: true,
     main: () => <ProductsListView />
+  },
+  {
+    path: "/orders",
+    exact: true,
+    main: () => <>Under Construction</>
+  },
+  {
+    path: "/quotes",
+    exact: true,
+    main: () =>  <>Under Construction</>
   }
 ];
 

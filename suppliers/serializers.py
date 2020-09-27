@@ -11,5 +11,6 @@ class SupplierSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Products
-        fields = '__all__'
+        fields = ('id', 'name', 'description', 'price_per_unit', 'currency', 'discount_percentage', \
+            'min_units_for_discount', 'other_notes', 'code', 'supplier', 'last_updated_at')
     

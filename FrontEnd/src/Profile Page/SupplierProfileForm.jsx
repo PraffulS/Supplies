@@ -49,7 +49,7 @@ export default class SupplierProfileForm extends React.Component {
       data.id = sessionStorage.getItem("supplier_id");
       let response = await supplier_register(data);
       if (response.code === 1) {
-        toast("We've successfuly daved your data!", { type: "success" });
+        toast("We've successfuly saved your information!", { type: "success" });
         this.props.changeState({ saving: false, showEdit: false, data: response.data });
       } else {
         toast(response.message, { type: "error" });

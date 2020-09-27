@@ -30,9 +30,10 @@ def add_edit_supplier(request):
         return JsonResponse({'code': 0, 'message' :'Internal Server Error'+str(e)})
 
 @require_POST
+@csrf_exempt
 def add_edit_product(request):
     try:
-        args = json.loads(request.body)
+        args = request.POST.dict()
         if not args:
             return HttpResponseServerError('Invalid Data Found')
         
@@ -44,9 +45,9 @@ def add_edit_product(request):
         [ setattr(product, key, args.get(key)) for key in args.keys() ]
         product.save()
 
-        return JsonResponse({'data' : ProductSerializer(product, many=False).data, 'message' : 'Success'})
+        return JsonResponse({'code': 1, 'data' : ProductSerializer(product, many=False).data, 'message' : 'Data saved successfully!'})
     except Exception as e:
-        return HttpResponseServerError('Server Error - {}'.format(str(e)))
+        return JsonResponse({'code': 0, 'message' :'Some Server error occured. Please try again.'})
 
 
 @require_POST
@@ -77,7 +78,11 @@ def get_supplier(request, s_id):
     result = Suppliers.objects.get(id=s_id)    
     return JsonResponse({'data': SupplierSerializer(result, many=False).data })
 
-
+@require_GET
+@csrf_exempt
+def delete_product(request, p_id):
+    Products.objects.filter(id=p_id).update(is_deleted=True)
+    return JsonResponse({'code': 1, 'message': 'Product deleted successfully!'})
 
 
 
