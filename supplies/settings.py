@@ -29,10 +29,6 @@ DEBUG = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOWED_ORIGINS = [
-    "https://23myy.csb.app"
-]
-
 # Application definition
 
 INSTALLED_APPS = [
