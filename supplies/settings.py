@@ -25,7 +25,7 @@ SECRET_KEY = 'b4=ph7!6b$(umn2%i8fy)!84*i7(4+uc^vs*@=y3o5fp@(r#lk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['suppliesmanagement.herokuapp.com']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
