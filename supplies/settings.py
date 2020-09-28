@@ -27,10 +27,9 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost']
 
-CORS_ORIGIN_ALLOW_ALL = True
-
 CORS_ALLOWED_ORIGINS = [
-    "https://23myy.csb.app"
+    "https://23myy.csb.app",
+    "https://mbl3y.csb.app"
 ]
 
 # Application definition
