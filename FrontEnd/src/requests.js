@@ -7,7 +7,7 @@ $.ajaxSetup({
 });
 
 export function doGet(path, successCallback, failureCallback) {
-  const url = `http://localhost:8000/${path}`;
+  const url = `https://suppliesmanagement.herokuapp.com/${path}`;
 
   return $.ajax({
     url,
@@ -35,7 +35,7 @@ export const doPost = (
   failureCallback,
   contentType
 ) => {
-  const url = `http://localhost:8000/${path}`;
+  const url = `https://suppliesmanagement.herokuapp.com/${path}`;
 
   return $.ajax({
     url,
