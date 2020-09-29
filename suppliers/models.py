@@ -18,6 +18,7 @@ class Suppliers(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     last_updated_at = models.DateTimeField(auto_now_add=True)
 
+    auth_key = models.CharField(max_length=100, default=None, null=True)
 
 class Products(models.Model):
     id = models.AutoField(primary_key=True)

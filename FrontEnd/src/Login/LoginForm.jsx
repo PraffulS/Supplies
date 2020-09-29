@@ -24,6 +24,7 @@ export default class LoginForm extends React.Component {
         toast(response.message, { type: "error" });
       } else {
         sessionStorage.setItem('supplier_id', response.supplier_id);
+        sessionStorage.setItem('auth_key', response.auth_key);
         toast(response.message, { type: "success" });
         window.location.href = '';
       }

@@ -6,9 +6,12 @@ from django.views.decorators.csrf import csrf_exempt
 from suppliers.models import *
 from suppliers.serializers import *
 from django.db import IntegrityError
+from suppliers.decorators import supplier_login_check
+import uuid
 
 @require_POST
 @csrf_exempt
+@supplier_login_check()
 def add_edit_supplier(request):
     try:
         args = request.POST.dict()
@@ -31,6 +34,7 @@ def add_edit_supplier(request):
 
 @require_POST
 @csrf_exempt
+@supplier_login_check()
 def add_edit_product(request):
     try:
         args = request.POST.dict()
@@ -64,10 +68,14 @@ def supplier_login(request):
     if not password == supplier.password:
         return JsonResponse({'code': 1, 'message' :'Wrong Password Given'})
     
-    return JsonResponse({'code': 0, 'message' :'Logged In!', 'supplier_id' : supplier.id})
+    supplier.auth_key = uuid.uuid1()
+    supplier.save()
+    
+    return JsonResponse({'code': 0, 'message' :'Logged In!', 'supplier_id' : supplier.id, 'auth_key': supplier.auth_key})
 
 @require_GET
 @csrf_exempt
+@supplier_login_check()
 def get_products_by_supplier(request, s_id):
     result = Products.objects.filter(supplier_id=s_id, is_deleted=False)
     return JsonResponse({'data': ProductSerializer(result, many=True).data })
@@ -84,6 +92,7 @@ def get_supplier(request, s_id=None):
 
 @require_GET
 @csrf_exempt
+@supplier_login_check()
 def delete_product(request, p_id):
     Products.objects.filter(id=p_id).update(is_deleted=True)
     return JsonResponse({'code': 1, 'message': 'Product deleted successfully!'})
